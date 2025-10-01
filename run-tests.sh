@@ -2,11 +2,9 @@ set -e
 
 main() {
   clean
-
   cmake .
   make
   make test
-
   clean
 }
 
