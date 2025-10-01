@@ -1,0 +1,2 @@
+# libbamboo
+bamboo c lib
