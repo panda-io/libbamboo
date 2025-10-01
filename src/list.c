@@ -40,7 +40,7 @@ bamboo_result_t bamboo_list_append(struct bamboo_list* list, void* value) {
     return BAMBOO_SUCCESS;
 }
 
-bamboo_result_t bamboo_remove_at(struct bamboo_list* list, size_t index) {
+bamboo_result_t bamboo_list_remove_at(struct bamboo_list* list, size_t index) {
     if (index >= list->cursor) {
         return BAMBOO_INDEX_OUT_OF_BOUNDS; // Out of bounds
     }

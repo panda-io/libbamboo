@@ -62,7 +62,7 @@ bamboo_result_t bamboo_list_set(struct bamboo_list* list, size_t index, void* va
 
 bamboo_result_t bamboo_list_append(struct bamboo_list* list, void* value);
 
-bamboo_result_t bamboo_remove_at(struct bamboo_list* list, size_t index);
+bamboo_result_t bamboo_list_remove_at(struct bamboo_list* list, size_t index);
 
 /* text declarations */
 
