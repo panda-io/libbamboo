@@ -8,6 +8,7 @@ endfunction()
 
 foreach(name IN ITEMS
   run-allocator
+  run-array
   )
   add_bamboo_executable(${name})
 endforeach()
