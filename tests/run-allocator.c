@@ -1,7 +1,5 @@
-#include "../src/bamboo-private.h"
-
+#include <bamboo.h>
 #include <assert.h>
-
 
 int main() {
     char buffer[1024];
