@@ -26,7 +26,7 @@ size_t bamboo_allocator_remaining(const struct bamboo_allocator* allocator);
 /* array declarations */
 
 struct bamboo_array {
-    bamboo_allocator allocator;
+    struct bamboo_allocator allocator;
     size_t elem_size;
     size_t length;
 };

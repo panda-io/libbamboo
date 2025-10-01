@@ -7,6 +7,7 @@ set(SRCS
   )
 
 add_library(bamboo ${SRCS})
+target_include_directories(bamboo PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 enable_testing()
 

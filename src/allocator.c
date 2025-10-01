@@ -1,5 +1,5 @@
-#include "bamboo-private.h"
 #include <string.h>
+#include "../include/bamboo.h"
 
 void bamboo_allocator_reset(struct bamboo_allocator* allocator) {
     allocator->cursor = 0;
