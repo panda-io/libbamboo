@@ -38,5 +38,14 @@ int main() {
         assert(*value == (int)(i * 20));
     }
 
+    assert(bamboo_remove_at(list, 5) == BAMBOO_INDEX_OUT_OF_BOUNDS);
+    assert(bamboo_remove_at(list, 0) == BAMBOO_SUCCESS);
+    assert(list->cursor == 4);
+    for (size_t i = 0; i < list->cursor; i++) {
+        int* value = (int*)bamboo_list_get(list, i);
+        assert(value != NULL);
+        assert(*value == (int)((i + 1) * 20));
+    }
+
     return 0;
 }
