@@ -1,7 +1,7 @@
 #include "../include/bamboo.h"
 #include <string.h>
 
-struct bamboo_string* bamboo_string_create(struct bamboo_allocator* allocator, size_t capacity) {
+struct bamboo_string* bamboo_string_create(struct bamboo_allocator* allocator, u_int16_t capacity) {
     struct bamboo_string* string = (struct bamboo_string*)bamboo_allocator_alloc(allocator, sizeof(struct bamboo_string));
     if (!string) {
         return NULL; // Allocation failed
@@ -25,7 +25,7 @@ bamboo_result_t bamboo_string_append(struct bamboo_string* to, struct bamboo_str
 }
 
 bamboo_result_t bamboo_string_append_c_str(struct bamboo_string* string, const char* str) {
-    size_t str_len = strlen(str);
+    u_int16_t str_len = strlen(str);
     if (string->length + str_len > string->capacity) {
         return BAMBOO_OUT_OF_CAPACITY; // Out of capacity
     }
@@ -44,7 +44,7 @@ bamboo_result_t bamboo_string_copy_from(struct bamboo_string* to, struct bamboo_
 }
 
 bamboo_result_t bamboo_string_copy_from_c_str(struct bamboo_string* string, const char* str) {
-    size_t str_len = strlen(str);
+    u_int16_t str_len = strlen(str);
     if (str_len > string->capacity) {
         return BAMBOO_OUT_OF_CAPACITY; // Out of capacity
     }
@@ -53,7 +53,7 @@ bamboo_result_t bamboo_string_copy_from_c_str(struct bamboo_string* string, cons
     return BAMBOO_SUCCESS;
 }
 
-bamboo_result_t bamboo_string_copy_to_c_str(const struct bamboo_string* string, char* out, size_t out_size) {
+bamboo_result_t bamboo_string_copy_to_c_str(const struct bamboo_string* string, char* out, u_int16_t out_size) {
     if (string->length + 1 > out_size) {
         return BAMBOO_OUT_OF_CAPACITY; // Out of capacity
     }
