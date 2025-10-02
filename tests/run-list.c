@@ -47,5 +47,18 @@ int main() {
         assert(*value == (int)((i + 1) * 20));
     }
 
+    assert(bamboo_list_insert_at(list, 5, &(int){100}) == BAMBOO_INDEX_OUT_OF_BOUNDS);
+    assert(bamboo_list_insert_at(list, 0, &(int){5}) == BAMBOO_SUCCESS);
+    assert(list->cursor == 5);
+    int expected_values_after_insert[] = {5, 20, 40, 60, 80};
+    for (size_t i = 0; i < list->cursor; i++) {
+        int* value = (int*)bamboo_list_get(list, i);
+        assert(value != NULL);
+        assert(*value == expected_values_after_insert[i]);
+    }
+    assert(bamboo_list_insert_at(list, 2, &(int){30}) == BAMBOO_OUT_OF_CAPACITY);
+    bamboo_list_clear(list);
+    assert(list->cursor == 0);
+
     return 0;
 }

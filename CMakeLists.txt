@@ -4,7 +4,6 @@ project (bamboo C)
 
 set(SRCS
   src/allocator.c
-  src/array.c
   src/list.c
   )
 
