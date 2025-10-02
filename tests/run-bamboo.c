@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 
 struct struct_with_string {
     struct bamboo_string str;

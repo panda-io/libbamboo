@@ -14,6 +14,7 @@ typedef enum {
     BAMBOO_SUCCESS = 0,
     BAMBOO_INDEX_OUT_OF_BOUNDS,
     BAMBOO_OUT_OF_CAPACITY,
+    BAMBOO_INVALID_POINTER,
     BAMBOO_EOF
 } bamboo_result_t;
 
@@ -67,6 +68,8 @@ struct bamboo_string {
 };
 
 struct bamboo_string* bamboo_string_create(struct bamboo_allocator* allocator, u_int16_t capacity);
+
+bamboo_result_t bamboo_string_init(struct bamboo_string* string, struct bamboo_allocator* allocator, u_int16_t capacity);
 
 bamboo_result_t bamboo_string_append(struct bamboo_string* to, struct bamboo_string* from);
 
