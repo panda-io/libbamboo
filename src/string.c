@@ -15,19 +15,6 @@ struct bamboo_string* bamboo_string_create(struct bamboo_allocator* allocator, u
     return string;
 }
 
-bamboo_result_t bamboo_string_init(struct bamboo_string* string, struct bamboo_allocator* allocator, u_int16_t capacity) {
-    if (!string) {
-        return BAMBOO_INVALID_POINTER; // Invalid string pointer
-    }
-    string->data = (char*)bamboo_allocator_alloc(allocator, capacity);
-    if (!string->data) {
-        return BAMBOO_OUT_OF_CAPACITY; // Allocation failed
-    }
-    string->length = 0;
-    string->capacity = capacity;
-    return BAMBOO_SUCCESS;
-}
-
 bamboo_result_t bamboo_string_append(struct bamboo_string* to, struct bamboo_string* from) {
     if (to->length + from->length > to->capacity) {
         return BAMBOO_OUT_OF_CAPACITY; // Out of capacity

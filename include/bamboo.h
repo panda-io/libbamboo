@@ -69,8 +69,6 @@ struct bamboo_string {
 
 struct bamboo_string* bamboo_string_create(struct bamboo_allocator* allocator, u_int16_t capacity);
 
-bamboo_result_t bamboo_string_init(struct bamboo_string* string, struct bamboo_allocator* allocator, u_int16_t capacity);
-
 bamboo_result_t bamboo_string_append(struct bamboo_string* to, struct bamboo_string* from);
 
 bamboo_result_t bamboo_string_append_c_str(struct bamboo_string* string, const char* str);
