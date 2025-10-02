@@ -66,7 +66,13 @@ struct bamboo_string {
 
 struct bamboo_string* bamboo_string_create(struct bamboo_allocator* allocator, size_t capacity);
 
+bamboo_result_t bamboo_string_append(struct bamboo_string* to, struct bamboo_string* from);
+
 bamboo_result_t bamboo_string_append_c_str(struct bamboo_string* string, const char* str);
+
+bamboo_result_t bamboo_string_copy_from(struct bamboo_string* to, struct bamboo_string* from);
+
+bamboo_result_t bamboo_string_copy_from_c_str(struct bamboo_string* string, const char* str);
 
 bamboo_result_t bamboo_string_copy_to_c_str(const struct bamboo_string* string, char* out, size_t out_size);
 

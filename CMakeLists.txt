@@ -5,6 +5,7 @@ project (bamboo C)
 set(SRCS
   src/allocator.c
   src/list.c
+  src/string.c
   )
 
 add_library(bamboo ${SRCS})
