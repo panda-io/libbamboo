@@ -75,5 +75,36 @@ int main() {
     assert(bamboo_list_append(sl->list, &(struct bamboo_string*){NULL}) == BAMBOO_OUT_OF_CAPACITY);
     assert(bamboo_allocator_remaining(&allocator) == sizeof(buffer) - sizeof(struct struct_with_list) - sizeof(struct bamboo_list) - sizeof(struct bamboo_string*) * 3 - sizeof(struct bamboo_string) * 3 - 10 * 3);
 
+    /* test nested list in a struct */
+    bamboo_allocator_reset(&allocator);
+    struct struct_with_list* nl = bamboo_allocator_alloc(&allocator, sizeof(struct struct_with_list));
+    assert(nl != NULL);
+    nl->list = bamboo_list_create(&allocator, sizeof(struct bamboo_list*), 2);
+    assert(nl->list != NULL);
+    assert(nl->list->elem_size == sizeof(struct bamboo_list*));
+    assert(nl->list->capacity == 2);
+    assert(nl->list->cursor == 0);
+    for (int i = 0; i < 2; i++) {
+        struct bamboo_list* inner_list = bamboo_list_create(&allocator, sizeof(int32_t), 4);
+        assert(inner_list != NULL);
+        for (int32_t j = 0; j < 4; j++) {
+            assert(bamboo_list_append(inner_list, &j) == BAMBOO_SUCCESS);
+        }
+        assert(bamboo_list_append(nl->list, &inner_list) == BAMBOO_SUCCESS);
+        assert(nl->list->cursor == i + 1);
+        struct bamboo_list** val = (struct bamboo_list**)bamboo_list_get(nl->list, i);
+        assert(val != NULL);
+        assert((*val)->elem_size == sizeof(int32_t));
+        assert((*val)->capacity == 4);
+        assert((*val)->cursor == 4);
+        for (int32_t j = 0; j < 4; j++) {
+            int32_t* inner_val = (int32_t*)bamboo_list_get(*val, j);
+            assert(inner_val != NULL);
+            assert(*inner_val == j);
+        }
+    }
+    assert(bamboo_list_append(nl->list, &(struct bamboo_list*){NULL}) == BAMBOO_OUT_OF_CAPACITY);
+    assert(bamboo_allocator_remaining(&allocator) == sizeof(buffer) - sizeof(struct struct_with_list) - sizeof(struct bamboo_list) - sizeof(struct bamboo_list*) * 2 - (sizeof(struct bamboo_list) + sizeof(int32_t) * 4) * 2);
+
     return 0;
 }
