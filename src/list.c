@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdint.h>
 
-struct bamboo_list* bamboo_list_create(struct bamboo_allocator* allocator, u_int16_t elem_size, u_int16_t capacity) {
+struct bamboo_list* bamboo_list_create(struct bamboo_allocator* allocator, size_t elem_size, size_t capacity) {
     struct bamboo_list* list = (struct bamboo_list*)bamboo_allocator_alloc(allocator, sizeof(struct bamboo_list));
     if (!list) {
         return NULL; // Allocation failed
@@ -17,14 +17,14 @@ struct bamboo_list* bamboo_list_create(struct bamboo_allocator* allocator, u_int
     return list;
 }
 
-void* bamboo_list_get(const struct bamboo_list* list, u_int16_t index) {
+void* bamboo_list_get(const struct bamboo_list* list, size_t index) {
     if (index >= list->cursor) {
         return NULL; // Out of bounds
     }
     return (char*)list->data + (index * list->elem_size);
 }
 
-bamboo_result_t bamboo_list_set(struct bamboo_list* list, u_int16_t index, void* value) {
+bamboo_result_t bamboo_list_set(struct bamboo_list* list, size_t index, void* value) {
     if (index >= list->cursor) {
         return BAMBOO_INDEX_OUT_OF_BOUNDS; // Out of bounds
     }
@@ -41,7 +41,7 @@ void* bamboo_list_allocate_next(struct bamboo_list* list) {
     return ptr;
 }
 
-bamboo_result_t bamboo_list_insert_at(struct bamboo_list* list, u_int16_t index, void* value) {
+bamboo_result_t bamboo_list_insert_at(struct bamboo_list* list, size_t index, void* value) {
     if (list->cursor >= list->capacity) {
         return BAMBOO_OUT_OF_CAPACITY; // Out of capacity
     }
@@ -63,7 +63,7 @@ bamboo_result_t bamboo_list_append(struct bamboo_list* list, void* value) {
     return BAMBOO_SUCCESS;
 }
 
-bamboo_result_t bamboo_list_remove_at(struct bamboo_list* list, u_int16_t index) {
+bamboo_result_t bamboo_list_remove_at(struct bamboo_list* list, size_t index) {
     if (index >= list->cursor) {
         return BAMBOO_INDEX_OUT_OF_BOUNDS; // Out of bounds
     }

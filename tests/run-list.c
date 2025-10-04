@@ -20,20 +20,20 @@ int main() {
     for (int i = 0; i < 5; i++) {
         int value = i * 10;
         assert(bamboo_list_append(list, &value) == BAMBOO_SUCCESS);
-        assert(list->cursor == (u_int16_t)(i + 1));
+        assert(list->cursor == (size_t)(i + 1));
     }
     assert(bamboo_list_append(list, &(int){50}) == BAMBOO_OUT_OF_CAPACITY);
     assert(bamboo_list_get(list, 5) == NULL);
     assert(bamboo_list_set(list, 5, &(int){100}) == BAMBOO_INDEX_OUT_OF_BOUNDS);
     assert(list->cursor == 5);
-    for (u_int16_t i = 0; i < list->cursor; i++) {
+    for (size_t i = 0; i < list->cursor; i++) {
         int* value = (int*)bamboo_list_get(list, i);
         assert(value != NULL);
         assert(*value == (int)(i * 10));
         int new_value = (int)(i * 20);
         assert(bamboo_list_set(list, i, &new_value) == BAMBOO_SUCCESS);
     }
-    for (u_int16_t i = 0; i < list->cursor; i++) {
+    for (size_t i = 0; i < list->cursor; i++) {
         int* value = (int*)bamboo_list_get(list, i);
         assert(value != NULL);
         assert(*value == (int)(i * 20));
@@ -42,7 +42,7 @@ int main() {
     assert(bamboo_list_remove_at(list, 5) == BAMBOO_INDEX_OUT_OF_BOUNDS);
     assert(bamboo_list_remove_at(list, 0) == BAMBOO_SUCCESS);
     assert(list->cursor == 4);
-    for (u_int16_t i = 0; i < list->cursor; i++) {
+    for (size_t i = 0; i < list->cursor; i++) {
         int* value = (int*)bamboo_list_get(list, i);
         assert(value != NULL);
         assert(*value == (int)((i + 1) * 20));
@@ -52,7 +52,7 @@ int main() {
     assert(bamboo_list_insert_at(list, 0, &(int){5}) == BAMBOO_SUCCESS);
     assert(list->cursor == 5);
     int expected_values_after_insert[] = {5, 20, 40, 60, 80};
-    for (u_int16_t i = 0; i < list->cursor; i++) {
+    for (size_t i = 0; i < list->cursor; i++) {
         int* value = (int*)bamboo_list_get(list, i);
         assert(value != NULL);
         assert(*value == expected_values_after_insert[i]);

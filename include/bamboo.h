@@ -22,40 +22,40 @@ typedef enum {
 
 struct bamboo_allocator {
     void* data;
-    u_int32_t size;
-    u_int32_t cursor;
+    size_t size;
+    size_t cursor;
 };
 
-void bamboo_allocator_init(struct bamboo_allocator* allocator, void* data, u_int32_t size);
+void bamboo_allocator_init(struct bamboo_allocator* allocator, void* data, size_t size);
 
-void* bamboo_allocator_alloc(struct bamboo_allocator* allocator, u_int32_t size);
+void* bamboo_allocator_alloc(struct bamboo_allocator* allocator, size_t size);
 
 void bamboo_allocator_reset(struct bamboo_allocator* allocator);
 
-u_int32_t bamboo_allocator_remaining(const struct bamboo_allocator* allocator);
+size_t bamboo_allocator_remaining(const struct bamboo_allocator* allocator);
 
 /* list declarations */
 
 struct bamboo_list {
     void* data;
-    u_int16_t elem_size;
-    u_int16_t capacity;
-    u_int16_t cursor;
+    size_t elem_size;
+    size_t capacity;
+    size_t cursor;
 };
 
-struct bamboo_list* bamboo_list_create(struct bamboo_allocator* allocator, u_int16_t elem_size, u_int16_t capacity);
+struct bamboo_list* bamboo_list_create(struct bamboo_allocator* allocator, size_t elem_size, size_t capacity);
 
-void* bamboo_list_get(const struct bamboo_list* list, u_int16_t index);
+void* bamboo_list_get(const struct bamboo_list* list, size_t index);
 
-bamboo_result_t bamboo_list_set(struct bamboo_list* list, u_int16_t index, void* value);
+bamboo_result_t bamboo_list_set(struct bamboo_list* list, size_t index, void* value);
 
 void* bamboo_list_allocate_next(struct bamboo_list* list);
 
 bamboo_result_t bamboo_list_append(struct bamboo_list* list, void* value);
 
-bamboo_result_t bamboo_list_insert_at(struct bamboo_list* list, u_int16_t index, void* value);
+bamboo_result_t bamboo_list_insert_at(struct bamboo_list* list, size_t index, void* value);
 
-bamboo_result_t bamboo_list_remove_at(struct bamboo_list* list, u_int16_t index);
+bamboo_result_t bamboo_list_remove_at(struct bamboo_list* list, size_t index);
 
 void bamboo_list_clear(struct bamboo_list* list);
 
@@ -63,11 +63,11 @@ void bamboo_list_clear(struct bamboo_list* list);
 
 struct bamboo_string {
     char* data;
-    u_int16_t length;
-    u_int16_t capacity;
+    size_t length;
+    size_t capacity;
 };
 
-struct bamboo_string* bamboo_string_create(struct bamboo_allocator* allocator, u_int16_t capacity);
+struct bamboo_string* bamboo_string_create(struct bamboo_allocator* allocator, size_t capacity);
 
 bamboo_result_t bamboo_string_append(struct bamboo_string* to, struct bamboo_string* from);
 
@@ -77,7 +77,7 @@ bamboo_result_t bamboo_string_copy_from(struct bamboo_string* to, struct bamboo_
 
 bamboo_result_t bamboo_string_copy_from_c_str(struct bamboo_string* string, const char* str);
 
-bamboo_result_t bamboo_string_copy_to_c_str(const struct bamboo_string* string, char* out, u_int16_t out_size);
+bamboo_result_t bamboo_string_copy_to_c_str(const struct bamboo_string* string, char* out, size_t out_size);
 
 void bamboo_string_clear(struct bamboo_string* string);
 
@@ -85,8 +85,8 @@ void bamboo_string_clear(struct bamboo_string* string);
 
 struct bamboo_reader {
     u_int8_t* data;
-    u_int32_t size;
-    u_int32_t cursor;
+    size_t size;
+    size_t cursor;
 };
 
 #ifdef __cplusplus
